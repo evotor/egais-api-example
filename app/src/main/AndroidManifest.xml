@@ -9,7 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".orginfo.OrgInfoListActivity"
+            android:label="@string/title_orginfo_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".orginfo.OrgInfoDetailActivity"
+            android:label="@string/title_orginfo_detail"
+            android:parentActivityName=".orginfo.OrgInfoListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ru.evotor.egais.api.example.orginfo.OrgInfoListActivity" />
+        </activity>
     </application>
 
 </manifest>
