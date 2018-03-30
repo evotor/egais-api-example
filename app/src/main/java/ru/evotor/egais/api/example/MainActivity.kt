@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.evotor.egais.api.example.orginfo.OrgInfoListActivity
 import ru.evotor.egais.api.example.product.ProductListActivity
+import ru.evotor.egais.api.example.waybill.WaybillListActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +20,10 @@ class MainActivity : AppCompatActivity() {
 
         viewProducts.setOnClickListener {
             startActivity(Intent(this@MainActivity, ProductListActivity::class.java))
+        }
+
+        viewWayBills.setOnClickListener {
+            startActivity(Intent(this@MainActivity, WaybillListActivity::class.java))
         }
     }
 }

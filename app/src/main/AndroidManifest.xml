@@ -32,7 +32,7 @@
         <activity
             android:name=".product.ProductListActivity"
             android:label="@string/title_product_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".product.ProductDetailActivity"
             android:label="@string/title_product_detail"
@@ -41,6 +41,19 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ru.evotor.egais.api.example.product.ProductListActivity" />
+        </activity>
+        <activity
+            android:name=".waybill.WaybillListActivity"
+            android:label="@string/title_waybill_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".waybill.WaybillDetailActivity"
+            android:label="@string/title_waybill_detail"
+            android:parentActivityName=".waybill.WaybillListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ru.evotor.egais.api.example.waybill.WaybillListActivity" />
         </activity>
     </application>
 

@@ -1,4 +1,4 @@
-package ru.evotor.egais.api.example.orginfo
+package ru.evotor.egais.api.example.waybill
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,28 +11,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_orginfo_list.*
-import kotlinx.android.synthetic.main.orginfo_list.*
-import kotlinx.android.synthetic.main.orginfo_list_content.view.*
-import ru.evotor.egais.api.DictionaryApi
+import kotlinx.android.synthetic.main.activity_waybill_list.*
+import kotlinx.android.synthetic.main.waybill_list.*
+import kotlinx.android.synthetic.main.waybill_list_content.view.*
+import ru.evotor.egais.api.WayBillApi
 import ru.evotor.egais.api.example.R
-import ru.evotor.egais.api.model.dictionary.OrgInfo
+import ru.evotor.egais.api.model.document.waybill.WayBill
 import ru.evotor.query.Cursor
 
 /**
  * An activity representing a list of Pings. This activity
  * has different presentations for handset and tablet-size devices. On
  * handsets, the activity presents a list of items, which when touched,
- * lead to a [OrgInfoDetailActivity] representing
+ * lead to a [WaybillDetailActivity] representing
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-class OrgInfoListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor<OrgInfo>> {
+class WaybillListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor<WayBill>> {
 
-    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor<OrgInfo>?> {
-        class OrgInfoLoader : AsyncTaskLoader<Cursor<OrgInfo>?>(this@OrgInfoListActivity) {
-            override fun loadInBackground(): Cursor<OrgInfo>? {
-                return DictionaryApi.getOrgInfos(context)
+    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor<WayBill>?> {
+        class ProductInfoLoader : AsyncTaskLoader<Cursor<WayBill>?>(this@WaybillListActivity) {
+            override fun loadInBackground(): Cursor<WayBill>? {
+                return WayBillApi.getWayBillList(context)
             }
 
             override fun onStartLoading() {
@@ -40,15 +40,15 @@ class OrgInfoListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<C
             }
         }
 
-        return OrgInfoLoader()
+        return ProductInfoLoader()
     }
 
-    override fun onLoadFinished(loader: Loader<Cursor<OrgInfo>>?, data: Cursor<OrgInfo>?) {
-        (orginfo_list.adapter as SimpleItemRecyclerViewAdapter).swapCursor(data)
+    override fun onLoadFinished(loader: Loader<Cursor<WayBill>>?, data: Cursor<WayBill>?) {
+        (waybill_list.adapter as WaybillListActivity.SimpleItemRecyclerViewAdapter).swapCursor(data)
     }
 
-    override fun onLoaderReset(loader: Loader<Cursor<OrgInfo>>?) {
-        (orginfo_list.adapter as SimpleItemRecyclerViewAdapter).swapCursor(null)
+    override fun onLoaderReset(loader: Loader<Cursor<WayBill>>?) {
+        (waybill_list.adapter as WaybillListActivity.SimpleItemRecyclerViewAdapter).swapCursor(null)
     }
 
     /**
@@ -59,12 +59,12 @@ class OrgInfoListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<C
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_orginfo_list)
+        setContentView(R.layout.activity_waybill_list)
 
         setSupportActionBar(toolbar)
         toolbar.title = title
 
-        if (orginfo_detail_container != null) {
+        if (waybill_detail_container != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
@@ -72,7 +72,7 @@ class OrgInfoListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<C
             mTwoPane = true
         }
 
-        setupRecyclerView(orginfo_list)
+        setupRecyclerView(waybill_list)
 
         supportLoaderManager.initLoader(1, null, this);
     }
@@ -81,8 +81,8 @@ class OrgInfoListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<C
         recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, null, mTwoPane)
     }
 
-    class SimpleItemRecyclerViewAdapter(private val mParentActivity: OrgInfoListActivity,
-                                        private var mValues: Cursor<OrgInfo>?,
+    class SimpleItemRecyclerViewAdapter(private val mParentActivity: WaybillListActivity,
+                                        private var mValues: Cursor<WayBill>?,
                                         private val mTwoPane: Boolean) :
             RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
@@ -90,20 +90,20 @@ class OrgInfoListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<C
 
         init {
             mOnClickListener = View.OnClickListener { v ->
-                val item = v.tag as OrgInfo
+                val item = v.tag as WayBill
                 if (mTwoPane) {
-                    val fragment = OrgInfoDetailFragment().apply {
+                    val fragment = WaybillDetailFragment().apply {
                         arguments = Bundle().apply {
-                            putString(OrgInfoDetailFragment.ARG_ITEM_ID, item.clientRegId)
+                            putString(WaybillDetailFragment.ARG_ITEM_ID, item.uuid.toString())
                         }
                     }
                     mParentActivity.supportFragmentManager
                             .beginTransaction()
-                            .replace(R.id.orginfo_detail_container, fragment)
+                            .replace(R.id.waybill_detail_container, fragment)
                             .commit()
                 } else {
-                    val intent = Intent(v.context, OrgInfoDetailActivity::class.java).apply {
-                        putExtra(OrgInfoDetailFragment.ARG_ITEM_ID, item.clientRegId)
+                    val intent = Intent(v.context, WaybillDetailActivity::class.java).apply {
+                        putExtra(WaybillDetailFragment.ARG_ITEM_ID, item.uuid.toString())
                     }
                     v.context.startActivity(intent)
                 }
@@ -112,15 +112,15 @@ class OrgInfoListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<C
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.orginfo_list_content, parent, false)
+                    .inflate(R.layout.waybill_list_content, parent, false)
             return ViewHolder(view)
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             mValues?.moveToPosition(position)
             val item = mValues?.getValue() ?: return
-            holder.mIdView.text = item.clientRegId
-            holder.mContentView.text = item.fullName
+            holder.mIdView.text = item.uuid.toString()
+            holder.mContentView.text = item.number + ", " + item.date.toString()
 
             with(holder.itemView) {
                 tag = item
@@ -132,7 +132,7 @@ class OrgInfoListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<C
             return mValues?.count ?: 0
         }
 
-        fun swapCursor(cursor: Cursor<OrgInfo>?) {
+        fun swapCursor(cursor: Cursor<WayBill>?) {
             mValues = cursor
             notifyDataSetChanged()
         }

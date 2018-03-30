@@ -7,4 +7,6 @@
     <string name="title_orginfo_detail">OrgInfo Detail</string>
     <string name="title_product_list">Products</string>
     <string name="title_product_detail">Product Detail</string>
+    <string name="title_waybill_list">Waybills</string>
+    <string name="title_waybill_detail">Waybill Detail</string>
 </resources>

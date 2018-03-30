@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.product_list_content.view.*
 import ru.evotor.egais.api.DictionaryApi
 import ru.evotor.egais.api.example.R
 import ru.evotor.egais.api.model.dictionary.ProductInfo
-import ru.evotor.egais.api.provider.Cursor
+import ru.evotor.query.Cursor
 
 /**
  * An activity representing a list of Pings. This activity
