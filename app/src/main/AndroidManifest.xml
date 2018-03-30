@@ -12,6 +12,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -27,6 +28,19 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ru.evotor.egais.api.example.orginfo.OrgInfoListActivity" />
+        </activity>
+        <activity
+            android:name=".product.ProductListActivity"
+            android:label="@string/title_product_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".product.ProductDetailActivity"
+            android:label="@string/title_product_detail"
+            android:parentActivityName=".product.ProductListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ru.evotor.egais.api.example.product.ProductListActivity" />
         </activity>
     </application>
 

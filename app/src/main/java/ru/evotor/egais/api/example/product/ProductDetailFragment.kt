@@ -1,4 +1,4 @@
-package ru.evotor.egais.api.example.orginfo
+package ru.evotor.egais.api.example.product
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,31 +8,34 @@ import android.support.v4.content.Loader
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.activity_orginfo_detail.*
-import kotlinx.android.synthetic.main.orginfo_detail.*
+import kotlinx.android.synthetic.main.activity_product_detail.*
+import kotlinx.android.synthetic.main.product_detail.*
 import ru.evotor.egais.api.DictionaryApi
 import ru.evotor.egais.api.example.R
-import ru.evotor.egais.api.model.dictionary.OrgInfo
+import ru.evotor.egais.api.model.dictionary.ProductInfo
 
 /**
- * A fragment representing a single OrgInfo detail screen.
- * This fragment is either contained in a [OrgInfoListActivity]
- * in two-pane mode (on tablets) or a [OrgInfoDetailActivity]
+ * A fragment representing a single Product detail screen.
+ * This fragment is either contained in a [ProductListActivity]
+ * in two-pane mode (on tablets) or a [ProductDetailActivity]
  * on handsets.
  */
-class OrgInfoDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<OrgInfo?> {
+class ProductDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<ProductInfo?> {
 
-    private var mItem: OrgInfo? = null
+    /**
+     * The dummy content this fragment is presenting.
+     */
+    private var mItem: ProductInfo? = null
 
-    override fun onCreateLoader(id: Int, args: Bundle?): Loader<OrgInfo?> {
-        class OrgInfoLoader : AsyncTaskLoader<OrgInfo?>(context) {
-            override fun loadInBackground(): OrgInfo? {
+    override fun onCreateLoader(id: Int, args: Bundle?): Loader<ProductInfo?> {
+        class ProductInfoLoader : AsyncTaskLoader<ProductInfo?>(context) {
+            override fun loadInBackground(): ProductInfo? {
                 return arguments?.let {
-                    if (it.containsKey(ARG_ITEM_ID)) {
+                    if (it.containsKey(ProductDetailFragment.ARG_ITEM_ID)) {
                         // Load the dummy content specified by the fragment
                         // arguments. In a real-world scenario, use a Loader
                         // to load content from a content provider.
-                        DictionaryApi.getOrgInfoByClientRegId(context, it.getString(ARG_ITEM_ID))
+                        DictionaryApi.getProductInfoByAlcCode(context, it.getString(ProductDetailFragment.ARG_ITEM_ID))
                     } else {
                         null
                     }
@@ -44,15 +47,15 @@ class OrgInfoDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<OrgInfo?
             }
         }
 
-        return OrgInfoLoader()
+        return ProductInfoLoader()
     }
 
-    override fun onLoadFinished(loader: Loader<OrgInfo?>, data: OrgInfo?) {
+    override fun onLoadFinished(loader: Loader<ProductInfo?>, data: ProductInfo?) {
         updateData(data)
     }
 
 
-    override fun onLoaderReset(loader: Loader<OrgInfo?>) {
+    override fun onLoaderReset(loader: Loader<ProductInfo?>) {
         updateData(null)
     }
 
@@ -61,15 +64,15 @@ class OrgInfoDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<OrgInfo?
         loaderManager.initLoader(0, null, this);
     }
 
-    private fun updateData(data: OrgInfo?) {
+    private fun updateData(data: ProductInfo?) {
         mItem = data
-        orginfo_detail?.text = mItem?.toString()
-        activity?.toolbar_layout?.title = mItem?.clientRegId
+        product_detail?.text = mItem?.toString()
+        activity?.toolbar_layout?.title = mItem?.alcCode
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.orginfo_detail, container, false)
+        val rootView = inflater.inflate(R.layout.product_detail, container, false)
 
         // Show the dummy content as text in a TextView.
         mItem?.let {
