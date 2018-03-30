@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">EgaisAPIExample</string>
+    <string name="main_a_btn_waybill">Накладные</string>
+    <string name="main_a_btn_org_info">Организации</string>
+    <string name="main_a_btn_products">Товары</string>
 </resources>
