@@ -64,7 +64,7 @@ class OrgInfoDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<OrgInfo?
 
     private fun updateData(data: OrgInfo?) {
         mItem = data
-        orginfo_detail.text = mItem?.toString()
+        orginfo_detail?.text = mItem?.toString()
         activity?.toolbar_layout?.title = mItem?.clientRegId
     }
 
