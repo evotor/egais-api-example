@@ -80,7 +80,7 @@ class WaybillDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<WaybillD
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.product_detail, container, false)
+        val rootView = inflater.inflate(R.layout.waybill_detail, container, false)
 
         // Show the dummy content as text in a TextView.
         mItem?.let {
