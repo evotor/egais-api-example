@@ -9,4 +9,7 @@
     <string name="title_product_detail">Product Detail</string>
     <string name="title_waybill_list">Waybills</string>
     <string name="title_waybill_detail">Waybill Detail</string>
+    <string name="title_actwriteoff_list">ActWriteOffs</string>
+    <string name="title_actwriteoff_detail">ActWriteOff Detail</string>
+    <string name="main_a_btn_actwriteoff">Акты списания со склада</string>
 </resources>

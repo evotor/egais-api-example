@@ -36,9 +36,6 @@ class WaybillDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<WaybillD
             override fun loadInBackground(): WayBillWithPositions? {
                 return arguments?.let {
                     if (it.containsKey(WaybillDetailFragment.ARG_ITEM_ID)) {
-                        // Load the dummy content specified by the fragment
-                        // arguments. In a real-world scenario, use a Loader
-                        // to load content from a content provider.
                         val uuid = it.getString(WaybillDetailFragment.ARG_ITEM_ID).let { UUID.fromString(it) }
                         WayBillWithPositions(
                                 WayBillApi.getWayBillByUuid(context, uuid),
@@ -82,7 +79,6 @@ class WaybillDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<WaybillD
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.waybill_detail, container, false)
 
-        // Show the dummy content as text in a TextView.
         mItem?.let {
             updateData(mItem)
         }

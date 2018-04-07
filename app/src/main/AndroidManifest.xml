@@ -45,7 +45,7 @@
         <activity
             android:name=".waybill.WaybillListActivity"
             android:label="@string/title_waybill_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".waybill.WaybillDetailActivity"
             android:label="@string/title_waybill_detail"
@@ -54,6 +54,19 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ru.evotor.egais.api.example.waybill.WaybillListActivity" />
+        </activity>
+        <activity
+            android:name=".actwriteoff.ActWriteOffListActivity"
+            android:label="@string/title_actwriteoff_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".actwriteoff.ActWriteOffDetailActivity"
+            android:label="@string/title_actwriteoff_detail"
+            android:parentActivityName=".actwriteoff.ActWriteOffListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ru.evotor.egais.api.example.actwriteoff.ActWriteOffListActivity" />
         </activity>
     </application>
 

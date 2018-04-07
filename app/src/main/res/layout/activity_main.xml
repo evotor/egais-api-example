@@ -28,5 +28,11 @@
             android:layout_height="wrap_content"
             android:text="@string/main_a_btn_waybill" />
 
+        <Button
+            android:id="@+id/viewActWriteOffs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/main_a_btn_actwriteoff" />
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
