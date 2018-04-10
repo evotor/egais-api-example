@@ -10,9 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.activity_product_detail.*
 import kotlinx.android.synthetic.main.product_detail.*
-import ru.evotor.egais.api.DictionaryApi
 import ru.evotor.egais.api.example.R
 import ru.evotor.egais.api.model.dictionary.ProductInfo
+import ru.evotor.egais.api.query.ProductInfoQuery
 
 /**
  * A fragment representing a single Product detail screen.
@@ -35,7 +35,13 @@ class ProductDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<ProductI
                         // Load the dummy content specified by the fragment
                         // arguments. In a real-world scenario, use a Loader
                         // to load content from a content provider.
-                        DictionaryApi.getProductInfoByAlcCode(context, it.getString(ProductDetailFragment.ARG_ITEM_ID))
+                        ProductInfoQuery()
+                                .alcCode.equal(it.getString(ProductDetailFragment.ARG_ITEM_ID))
+                                .execute(context)
+                                .let { cursor ->
+                                    cursor.moveToFirst()
+                                    cursor.getValue()
+                                }
                     } else {
                         null
                     }

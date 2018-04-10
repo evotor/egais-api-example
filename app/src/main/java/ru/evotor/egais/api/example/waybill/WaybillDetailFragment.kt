@@ -10,10 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.activity_waybill_detail.*
 import kotlinx.android.synthetic.main.waybill_detail.*
-import ru.evotor.egais.api.WayBillApi
 import ru.evotor.egais.api.example.R
 import ru.evotor.egais.api.model.document.waybill.WayBill
 import ru.evotor.egais.api.model.document.waybill.WayBillPosition
+import ru.evotor.egais.api.query.WayBillPositionQuery
+import ru.evotor.egais.api.query.WayBillQuery
 import java.util.*
 
 /**
@@ -38,8 +39,17 @@ class WaybillDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<WaybillD
                     if (it.containsKey(WaybillDetailFragment.ARG_ITEM_ID)) {
                         val uuid = it.getString(WaybillDetailFragment.ARG_ITEM_ID).let { UUID.fromString(it) }
                         WayBillWithPositions(
-                                WayBillApi.getWayBillByUuid(context, uuid),
-                                WayBillApi.getWayBillPositionListByUuid(context, uuid)?.toList()
+                                WayBillQuery()
+                                        .uuid.equal(uuid)
+                                        .execute(context)
+                                        .let { cursor ->
+                                            cursor.moveToFirst()
+                                            cursor.getValue()
+                                        },
+                                WayBillPositionQuery()
+                                        .wayBillUuid.equal(uuid)
+                                        .execute(context)
+                                        .toList()
                         )
                     } else {
                         null

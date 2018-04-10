@@ -14,9 +14,9 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_waybill_list.*
 import kotlinx.android.synthetic.main.waybill_list.*
 import kotlinx.android.synthetic.main.waybill_list_content.view.*
-import ru.evotor.egais.api.WayBillApi
 import ru.evotor.egais.api.example.R
 import ru.evotor.egais.api.model.document.waybill.WayBill
+import ru.evotor.egais.api.query.WayBillQuery
 import ru.evotor.query.Cursor
 
 /**
@@ -32,7 +32,7 @@ class WaybillListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<C
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor<WayBill>?> {
         class ProductInfoLoader : AsyncTaskLoader<Cursor<WayBill>?>(this@WaybillListActivity) {
             override fun loadInBackground(): Cursor<WayBill>? {
-                return WayBillApi.getWayBillList(context)
+                return WayBillQuery().noFilters().execute(context)
             }
 
             override fun onStartLoading() {

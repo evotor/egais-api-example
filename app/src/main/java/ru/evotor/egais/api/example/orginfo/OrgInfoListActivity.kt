@@ -14,9 +14,9 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_orginfo_list.*
 import kotlinx.android.synthetic.main.orginfo_list.*
 import kotlinx.android.synthetic.main.orginfo_list_content.view.*
-import ru.evotor.egais.api.DictionaryApi
 import ru.evotor.egais.api.example.R
 import ru.evotor.egais.api.model.dictionary.OrgInfo
+import ru.evotor.egais.api.query.OrgInfoQuery
 import ru.evotor.query.Cursor
 
 /**
@@ -32,7 +32,7 @@ class OrgInfoListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<C
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor<OrgInfo>?> {
         class OrgInfoLoader : AsyncTaskLoader<Cursor<OrgInfo>?>(this@OrgInfoListActivity) {
             override fun loadInBackground(): Cursor<OrgInfo>? {
-                return DictionaryApi.getOrgInfos(context)
+                return OrgInfoQuery().noFilters().execute(context)
             }
 
             override fun onStartLoading() {

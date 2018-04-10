@@ -10,9 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.activity_orginfo_detail.*
 import kotlinx.android.synthetic.main.orginfo_detail.*
-import ru.evotor.egais.api.DictionaryApi
 import ru.evotor.egais.api.example.R
 import ru.evotor.egais.api.model.dictionary.OrgInfo
+import ru.evotor.egais.api.query.OrgInfoQuery
 
 /**
  * A fragment representing a single OrgInfo detail screen.
@@ -32,7 +32,13 @@ class OrgInfoDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<OrgInfo?
                         // Load the dummy content specified by the fragment
                         // arguments. In a real-world scenario, use a Loader
                         // to load content from a content provider.
-                        DictionaryApi.getOrgInfoByClientRegId(context, it.getString(ARG_ITEM_ID))
+                        OrgInfoQuery()
+                                .clientRegId.equal(it.getString(ARG_ITEM_ID))
+                                .execute(context)
+                                .let { cursor ->
+                                    cursor.moveToFirst()
+                                    cursor.getValue()
+                                }
                     } else {
                         null
                     }

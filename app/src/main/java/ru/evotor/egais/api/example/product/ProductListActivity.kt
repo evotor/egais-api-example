@@ -14,9 +14,9 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_product_list.*
 import kotlinx.android.synthetic.main.product_list.*
 import kotlinx.android.synthetic.main.product_list_content.view.*
-import ru.evotor.egais.api.DictionaryApi
 import ru.evotor.egais.api.example.R
 import ru.evotor.egais.api.model.dictionary.ProductInfo
+import ru.evotor.egais.api.query.ProductInfoQuery
 import ru.evotor.query.Cursor
 
 /**
@@ -32,7 +32,7 @@ class ProductListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<C
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor<ProductInfo>?> {
         class ProductInfoLoader : AsyncTaskLoader<Cursor<ProductInfo>?>(this@ProductListActivity) {
             override fun loadInBackground(): Cursor<ProductInfo>? {
-                return DictionaryApi.getProductInfos(context)
+                return ProductInfoQuery().noFilters().execute(context)
             }
 
             override fun onStartLoading() {

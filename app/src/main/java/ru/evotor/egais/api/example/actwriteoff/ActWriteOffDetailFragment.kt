@@ -10,26 +10,17 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.activity_actwriteoff_detail.*
 import kotlinx.android.synthetic.main.actwriteoff_detail.*
-import ru.evotor.egais.api.ActWriteOffApi
 import ru.evotor.egais.api.example.R
 import ru.evotor.egais.api.model.document.actwriteoff.ActWriteOff
 import ru.evotor.egais.api.model.document.actwriteoff.ActWriteOffPosition
+import ru.evotor.egais.api.query.ActWriteOffPositionQuery
 import ru.evotor.egais.api.query.ActWriteOffQuery
 import java.util.*
 
-/**
- * A fragment representing a single ActWriteOff detail screen.
- * This fragment is either contained in a [ActWriteOffListActivity]
- * in two-pane mode (on tablets) or a [ActWriteOffDetailActivity]
- * on handsets.
- */
 class ActWriteOffDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<ActWriteOffDetailFragment.ActWriteOffWithPositions?> {
 
     data class ActWriteOffWithPositions(val actWriteOff: ActWriteOff?, val positions: List<ActWriteOffPosition>?)
 
-    /**
-     * The dummy content this fragment is presenting.
-     */
     private var mItem: ActWriteOffWithPositions? = null
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<ActWriteOffWithPositions?> {
@@ -42,8 +33,16 @@ class ActWriteOffDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<ActW
                         // to load content from a content provider.
                         val uuid = it.getString(ActWriteOffDetailFragment.ARG_ITEM_ID).let { UUID.fromString(it) }
                         ActWriteOffWithPositions(
-                                ActWriteOffQuery().uuid.equal(uuid).execute(context).getValue(),
-                                ActWriteOffApi.getActWriteOffPositionsByUuid(context, uuid)?.toList()
+                                ActWriteOffQuery()
+                                        .uuid.equal(uuid)
+                                        .execute(context)
+                                        .let { cursor ->
+                                            cursor.moveToFirst()
+                                            cursor.getValue()
+                                        },
+                                ActWriteOffPositionQuery()
+                                        .actWriteOffUuid.equal(uuid)
+                                        .execute(context).toList()
                         )
                     } else {
                         null

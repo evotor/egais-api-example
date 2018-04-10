@@ -14,9 +14,9 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_actwriteoff_list.*
 import kotlinx.android.synthetic.main.actwriteoff_list.*
 import kotlinx.android.synthetic.main.actwriteoff_list_content.view.*
-import ru.evotor.egais.api.ActWriteOffApi
 import ru.evotor.egais.api.example.R
 import ru.evotor.egais.api.model.document.actwriteoff.ActWriteOff
+import ru.evotor.egais.api.query.ActWriteOffQuery
 import ru.evotor.query.Cursor
 
 /**
@@ -32,7 +32,7 @@ class ActWriteOffListActivity : AppCompatActivity(), LoaderManager.LoaderCallbac
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor<ActWriteOff>?> {
         class ProductInfoLoader : AsyncTaskLoader<Cursor<ActWriteOff>?>(this@ActWriteOffListActivity) {
             override fun loadInBackground(): Cursor<ActWriteOff>? {
-                return ActWriteOffApi.getActWriteOffList(context)
+                return ActWriteOffQuery().noFilters().execute(context)
             }
 
             override fun onStartLoading() {
