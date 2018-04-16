@@ -16,8 +16,10 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.EVOTOR" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".orginfo.OrgInfoListActivity"
             android:label="@string/title_orginfo_list"
@@ -31,6 +33,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ru.evotor.egais.api.example.orginfo.OrgInfoListActivity" />
         </activity>
+
         <activity
             android:name=".product.ProductListActivity"
             android:label="@string/title_product_list"
@@ -44,6 +47,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ru.evotor.egais.api.example.product.ProductListActivity" />
         </activity>
+
         <activity
             android:name=".waybill.WaybillListActivity"
             android:label="@string/title_waybill_list"
@@ -57,10 +61,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ru.evotor.egais.api.example.waybill.WaybillListActivity" />
         </activity>
+
         <activity
             android:name=".actwriteoff.ActWriteOffListActivity"
             android:label="@string/title_actwriteoff_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".actwriteoff.ActWriteOffDetailActivity"
             android:label="@string/title_actwriteoff_detail"
@@ -69,6 +74,34 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ru.evotor.egais.api.example.actwriteoff.ActWriteOffListActivity" />
+        </activity>
+
+        <activity
+            android:name=".stock_commodity.StockCommodityListActivity"
+            android:label="@string/title_egais_commodity_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".stock_commodity.StockCommodityDetailActivity"
+            android:label="@string/title_orginfo_detail"
+            android:parentActivityName=".stock_commodity.StockCommodityListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ru.evotor.egais.api.example.stock_commodity.StockCommodityListActivity" />
+        </activity>
+
+        <activity
+            android:name=".shop_commodity.ShopCommodityListActivity"
+            android:label="@string/title_egais_commodity_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".shop_commodity.ShopCommodityDetailActivity"
+            android:label="@string/title_orginfo_detail"
+            android:parentActivityName=".shop_commodity.ShopCommodityListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ru.evotor.egais.api.example.shop_commodity.ShopCommodityListActivity" />
         </activity>
     </application>
 

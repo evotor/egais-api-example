@@ -32,7 +32,7 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
 
     implementation 'com.android.support:design:26.1.0'
-    implementation 'com.github.evotor:egais-api:38f9fabea9'
+    api 'ru.evotor:egais-api:0.0.9-dev'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
