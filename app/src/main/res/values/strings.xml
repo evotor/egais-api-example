@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">EgaisAPIExample</string>
     <string name="main_a_btn_waybill">Накладные</string>
+    <string name="main_a_btn_stock_commodity">Товарные остатки на складе</string>
+    <string name="main_a_btn_shop_commodity">Товарные остатки в магазине</string>
     <string name="main_a_btn_org_info">Организации</string>
     <string name="main_a_btn_products">Товары</string>
     <string name="title_orginfo_list">OrgInfos</string>
@@ -9,6 +11,7 @@
     <string name="title_product_detail">Product Detail</string>
     <string name="title_waybill_list">Waybills</string>
     <string name="title_waybill_detail">Waybill Detail</string>
+    <string name="title_egais_commodity_list">EgaisCommodities</string>
     <string name="title_actwriteoff_list">ActWriteOffs</string>
     <string name="title_actwriteoff_detail">ActWriteOff Detail</string>
     <string name="main_a_btn_actwriteoff">Акты списания со склада</string>

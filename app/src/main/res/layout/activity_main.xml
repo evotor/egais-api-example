@@ -34,5 +34,17 @@
             android:layout_height="wrap_content"
             android:text="@string/main_a_btn_actwriteoff" />
 
+        <Button
+            android:id="@+id/viewStockCommodity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/main_a_btn_stock_commodity" />
+
+        <Button
+            android:id="@+id/viewShopCommodity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/main_a_btn_shop_commodity" />
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

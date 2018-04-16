@@ -4,9 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import ru.evotor.egais.api.example.stock_commodity.StockCommodityListActivity
 import ru.evotor.egais.api.example.actwriteoff.ActWriteOffListActivity
 import ru.evotor.egais.api.example.orginfo.OrgInfoListActivity
 import ru.evotor.egais.api.example.product.ProductListActivity
+import ru.evotor.egais.api.example.shop_commodity.ShopCommodityListActivity
 import ru.evotor.egais.api.example.waybill.WaybillListActivity
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +27,14 @@ class MainActivity : AppCompatActivity() {
 
         viewWayBills.setOnClickListener {
             startActivity(Intent(this@MainActivity, WaybillListActivity::class.java))
+        }
+
+        viewStockCommodity.setOnClickListener {
+            startActivity(Intent(this@MainActivity, StockCommodityListActivity::class.java))
+        }
+
+        viewShopCommodity.setOnClickListener {
+            startActivity(Intent(this@MainActivity, ShopCommodityListActivity::class.java))
         }
 
         viewActWriteOffs.setOnClickListener {
