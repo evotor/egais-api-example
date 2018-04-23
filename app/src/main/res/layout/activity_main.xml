@@ -46,5 +46,11 @@
             android:layout_height="wrap_content"
             android:text="@string/main_a_btn_shop_commodity" />
 
+        <Button
+            android:id="@+id/clientSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/main_a_btn_client_settings"/>
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
