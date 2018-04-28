@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.support.v7.widget.AppCompatButton
 import android.widget.Toast
 import ru.evotor.egais.api.example.R
-import ru.evotor.egais.api.provider.client_settings.ClientSettingsContract
+import ru.evotor.egais.api.query.ClientSettingsQuery
 
 class ClientSettingsActivity : AppCompatActivity() {
 
@@ -21,11 +21,7 @@ class ClientSettingsActivity : AppCompatActivity() {
     }
 
     private fun getFsRarId() {
-        val fsRarId = contentResolver.query(ClientSettingsContract.FSRAR_ID_URI, null, null, null, null)
-                ?.let { cursor ->
-                    cursor.moveToFirst()
-                    cursor.getString(cursor.getColumnIndex(ClientSettingsContract.FSRAR_ID_COLUMN_NAME))
-                }
+        val fsRarId = ClientSettingsQuery().getFsRarId(this)
 
         println("fsrarid = $fsRarId")
         Toast.makeText(this, "fsrarid = \"$fsRarId\"", Toast.LENGTH_SHORT).show()
