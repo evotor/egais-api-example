@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.evotor.egais.api.example.stock_commodity.StockCommodityListActivity
 import ru.evotor.egais.api.example.actwriteoff.ActWriteOffListActivity
+import ru.evotor.egais.api.example.client_settings.ClientSettingsActivity
 import ru.evotor.egais.api.example.orginfo.OrgInfoListActivity
 import ru.evotor.egais.api.example.product.ProductListActivity
 import ru.evotor.egais.api.example.shop_commodity.ShopCommodityListActivity
@@ -39,6 +40,10 @@ class MainActivity : AppCompatActivity() {
 
         viewActWriteOffs.setOnClickListener {
             startActivity(Intent(this@MainActivity, ActWriteOffListActivity::class.java))
+        }
+
+        clientSettings.setOnClickListener {
+            startActivity(Intent(this@MainActivity, ClientSettingsActivity::class.java))
         }
     }
 }

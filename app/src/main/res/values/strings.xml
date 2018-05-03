@@ -15,4 +15,5 @@
     <string name="title_actwriteoff_list">ActWriteOffs</string>
     <string name="title_actwriteoff_detail">ActWriteOff Detail</string>
     <string name="main_a_btn_actwriteoff">Акты списания со склада</string>
+    <string name="main_a_btn_client_settings">Клиентские настройки</string>
 </resources>
