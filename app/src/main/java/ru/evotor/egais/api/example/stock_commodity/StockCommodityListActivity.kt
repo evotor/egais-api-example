@@ -15,18 +15,10 @@ import kotlinx.android.synthetic.main.activity_egais_commodity_list.*
 import kotlinx.android.synthetic.main.egais_commodity_list.*
 import kotlinx.android.synthetic.main.egais_commodity_list_content.view.*
 import ru.evotor.egais.api.example.R
-import ru.evotor.egais.api.model.document.stock_commodity.StockCommodity
+import ru.evotor.egais.api.model.dictionary.StockCommodity
 import ru.evotor.egais.api.query.StockCommodityQuery
 import ru.evotor.query.Cursor
 
-/**
- * An activity representing a list of Pings. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a [StockCommodityDetailActivity] representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
- */
 class StockCommodityListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor<StockCommodity>> {
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor<StockCommodity>?> {
@@ -65,10 +57,6 @@ class StockCommodityListActivity : AppCompatActivity(), LoaderManager.LoaderCall
         toolbar.title = title
 
         if (stock_commodity_detail_container != null) {
-            // The detail container view will be present only in the
-            // large-screen layouts (res/values-w900dp).
-            // If this view is present, then the
-            // activity should be in two-pane mode.
             mTwoPane = true
         }
 
@@ -95,7 +83,7 @@ class StockCommodityListActivity : AppCompatActivity(), LoaderManager.LoaderCall
                 if (mTwoPane) {
                     val fragment = StockCommodityDetailFragment().apply {
                         arguments = Bundle().apply {
-                            putString(StockCommodityDetailFragment.ARG_ITEM_ID, item.productInfoAlcCode)
+                            putString(StockCommodityDetailFragment.ARG_ITEM_ID, item.productInfo.alcCode)
                         }
                     }
                     mParentActivity.supportFragmentManager
@@ -104,7 +92,7 @@ class StockCommodityListActivity : AppCompatActivity(), LoaderManager.LoaderCall
                             .commit()
                 } else {
                     val intent = Intent(v.context, StockCommodityDetailActivity::class.java).apply {
-                        putExtra(StockCommodityDetailFragment.ARG_ITEM_ID, item.productInfoAlcCode)
+                        putExtra(StockCommodityDetailFragment.ARG_ITEM_ID, item.productInfo.alcCode)
                     }
                     v.context.startActivity(intent)
                 }
@@ -120,8 +108,7 @@ class StockCommodityListActivity : AppCompatActivity(), LoaderManager.LoaderCall
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             mValues?.moveToPosition(position)
             val item = mValues?.getValue() ?: return
-            holder.mIdView.text = item.productInfoAlcCode
-            //holder.mContentView.text = item.productInfoAlcCode + '\n' + item.quantity.toPlainString()
+            holder.mIdView.text = item.productInfo.alcCode
 
             with(holder.itemView) {
                 tag = item

@@ -16,18 +16,10 @@ import kotlinx.android.synthetic.main.egais_commodity_list.*
 import kotlinx.android.synthetic.main.egais_commodity_list_content.view.*
 import ru.evotor.egais.api.example.R
 import ru.evotor.egais.api.example.stock_commodity.StockCommodityDetailFragment
-import ru.evotor.egais.api.model.document.shop_commodity.ShopCommodity
+import ru.evotor.egais.api.model.dictionary.ShopCommodity
 import ru.evotor.egais.api.query.ShopCommodityQuery
 import ru.evotor.query.Cursor
 
-/**
- * An activity representing a list of Pings. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a [ShopCommodityDetailActivity] representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
- */
 class ShopCommodityListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor<ShopCommodity>> {
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor<ShopCommodity>?> {
@@ -96,7 +88,7 @@ class ShopCommodityListActivity : AppCompatActivity(), LoaderManager.LoaderCallb
                 if (mTwoPane) {
                     val fragment = StockCommodityDetailFragment().apply {
                         arguments = Bundle().apply {
-                            putString(ShopCommodityDetailFragment.ARG_ITEM_ID, item.productInfoAlcCode)
+                            putString(ShopCommodityDetailFragment.ARG_ITEM_ID, item.productInfo.alcCode)
                         }
                     }
                     mParentActivity.supportFragmentManager
@@ -105,7 +97,7 @@ class ShopCommodityListActivity : AppCompatActivity(), LoaderManager.LoaderCallb
                             .commit()
                 } else {
                     val intent = Intent(v.context, ShopCommodityDetailActivity::class.java).apply {
-                        putExtra(ShopCommodityDetailFragment.ARG_ITEM_ID, item.productInfoAlcCode)
+                        putExtra(ShopCommodityDetailFragment.ARG_ITEM_ID, item.productInfo.alcCode)
                     }
                     v.context.startActivity(intent)
                 }
@@ -121,7 +113,7 @@ class ShopCommodityListActivity : AppCompatActivity(), LoaderManager.LoaderCallb
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             mValues?.moveToPosition(position)
             val item = mValues?.getValue() ?: return
-            holder.mIdView.text = item.productInfoAlcCode
+            holder.mIdView.text = item.productInfo.alcCode
             //holder.mContentView.text = item.productInfoAlcCode + '\n' + item.quantity.toPlainString()
 
             with(holder.itemView) {

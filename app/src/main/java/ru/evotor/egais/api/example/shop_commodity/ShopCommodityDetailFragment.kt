@@ -11,16 +11,9 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.activity_egais_commodity_detail.*
 import kotlinx.android.synthetic.main.egais_commodity_detail.*
 import ru.evotor.egais.api.example.R
-import ru.evotor.egais.api.model.document.shop_commodity.ShopCommodity
+import ru.evotor.egais.api.model.dictionary.ShopCommodity
 import ru.evotor.egais.api.query.ShopCommodityQuery
-import java.util.*
 
-/**
- * A fragment representing a single OrgInfo detail screen.
- * This fragment is either contained in a [ShopCommodityListActivity]
- * in two-pane mode (on tablets) or a [ShopCommodityDetailActivity]
- * on handsets.
- */
 class ShopCommodityDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<ShopCommodity?> {
 
     private var mItem: ShopCommodity? = null
@@ -33,7 +26,7 @@ class ShopCommodityDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<Sh
                         // Load the dummy content specified by the fragment
                         // arguments. In a real-world scenario, use a Loader
                         // to load content from a content provider.
-                        val cursor = ShopCommodityQuery().productInfoAlcCode.equal(it.getString(ARG_ITEM_ID))
+                        val cursor = ShopCommodityQuery().productInfo.alcCode.equal(it.getString(ARG_ITEM_ID))
                                 .execute(context)
                         cursor.moveToFirst()
                         return cursor.getValue()
@@ -68,7 +61,7 @@ class ShopCommodityDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<Sh
     private fun updateData(data: ShopCommodity?) {
         mItem = data
         egais_commodity_detail?.text = mItem?.toString()
-        activity?.toolbar_layout?.title = mItem?.productInfoAlcCode
+        activity?.toolbar_layout?.title = mItem?.productInfo?.alcCode
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
