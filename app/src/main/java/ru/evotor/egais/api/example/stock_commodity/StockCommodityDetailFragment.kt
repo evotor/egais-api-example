@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.activity_egais_commodity_detail.*
 import kotlinx.android.synthetic.main.egais_commodity_detail.*
 import ru.evotor.egais.api.example.R
-import ru.evotor.egais.api.model.document.stock_commodity.StockCommodity
+import ru.evotor.egais.api.model.dictionary.StockCommodity
 import ru.evotor.egais.api.query.StockCommodityQuery
 import java.util.*
 
@@ -33,7 +33,7 @@ class StockCommodityDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<S
                         // Load the dummy content specified by the fragment
                         // arguments. In a real-world scenario, use a Loader
                         // to load content from a content provider.
-                        val cursor = StockCommodityQuery().productInfoAlcCode.equal(it.getString(ARG_ITEM_ID))
+                        val cursor = StockCommodityQuery().productInfo.alcCode.equal(it.getString(ARG_ITEM_ID))
                                 .execute(context)
                         cursor.moveToFirst()
                         return cursor.getValue()
@@ -68,7 +68,7 @@ class StockCommodityDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<S
     private fun updateData(data: StockCommodity?) {
         mItem = data
         egais_commodity_detail?.text = mItem?.toString()
-        activity?.toolbar_layout?.title = mItem?.productInfoAlcCode
+        activity?.toolbar_layout?.title = mItem?.productInfo?.alcCode
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

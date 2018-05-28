@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_egais_commodity_list.*
 import kotlinx.android.synthetic.main.egais_commodity_list.*
 import kotlinx.android.synthetic.main.egais_commodity_list_content.view.*
 import ru.evotor.egais.api.example.R
-import ru.evotor.egais.api.model.document.stock_commodity.StockCommodity
+import ru.evotor.egais.api.model.dictionary.StockCommodity
 import ru.evotor.egais.api.query.StockCommodityQuery
 import ru.evotor.query.Cursor
 
@@ -95,7 +95,7 @@ class StockCommodityListActivity : AppCompatActivity(), LoaderManager.LoaderCall
                 if (mTwoPane) {
                     val fragment = StockCommodityDetailFragment().apply {
                         arguments = Bundle().apply {
-                            putString(StockCommodityDetailFragment.ARG_ITEM_ID, item.productInfoAlcCode)
+                            putString(StockCommodityDetailFragment.ARG_ITEM_ID, item.productInfo.alcCode)
                         }
                     }
                     mParentActivity.supportFragmentManager
@@ -104,7 +104,7 @@ class StockCommodityListActivity : AppCompatActivity(), LoaderManager.LoaderCall
                             .commit()
                 } else {
                     val intent = Intent(v.context, StockCommodityDetailActivity::class.java).apply {
-                        putExtra(StockCommodityDetailFragment.ARG_ITEM_ID, item.productInfoAlcCode)
+                        putExtra(StockCommodityDetailFragment.ARG_ITEM_ID, item.productInfo.alcCode)
                     }
                     v.context.startActivity(intent)
                 }
@@ -120,7 +120,7 @@ class StockCommodityListActivity : AppCompatActivity(), LoaderManager.LoaderCall
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             mValues?.moveToPosition(position)
             val item = mValues?.getValue() ?: return
-            holder.mIdView.text = item.productInfoAlcCode
+            holder.mIdView.text = item.productInfo.alcCode
             //holder.mContentView.text = item.productInfoAlcCode + '\n' + item.quantity.toPlainString()
 
             with(holder.itemView) {
