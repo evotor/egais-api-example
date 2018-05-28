@@ -13,14 +13,7 @@ import kotlinx.android.synthetic.main.egais_commodity_detail.*
 import ru.evotor.egais.api.example.R
 import ru.evotor.egais.api.model.dictionary.StockCommodity
 import ru.evotor.egais.api.query.StockCommodityQuery
-import java.util.*
 
-/**
- * A fragment representing a single OrgInfo detail screen.
- * This fragment is either contained in a [StockCommodityListActivity]
- * in two-pane mode (on tablets) or a [StockCommodityDetailActivity]
- * on handsets.
- */
 class StockCommodityDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<StockCommodity?> {
 
     private var mItem: StockCommodity? = null
@@ -30,9 +23,6 @@ class StockCommodityDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<S
             override fun loadInBackground(): StockCommodity? {
                 return arguments?.let {
                     if (it.containsKey(ARG_ITEM_ID)) {
-                        // Load the dummy content specified by the fragment
-                        // arguments. In a real-world scenario, use a Loader
-                        // to load content from a content provider.
                         val cursor = StockCommodityQuery().productInfo.alcCode.equal(it.getString(ARG_ITEM_ID))
                                 .execute(context)
                         cursor.moveToFirst()
@@ -75,7 +65,6 @@ class StockCommodityDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<S
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.egais_commodity_detail, container, false)
 
-        // Show the dummy content as text in a TextView.
         mItem?.let {
             updateData(mItem)
         }

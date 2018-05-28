@@ -19,14 +19,6 @@ import ru.evotor.egais.api.model.dictionary.StockCommodity
 import ru.evotor.egais.api.query.StockCommodityQuery
 import ru.evotor.query.Cursor
 
-/**
- * An activity representing a list of Pings. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a [StockCommodityDetailActivity] representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
- */
 class StockCommodityListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor<StockCommodity>> {
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor<StockCommodity>?> {
@@ -65,10 +57,6 @@ class StockCommodityListActivity : AppCompatActivity(), LoaderManager.LoaderCall
         toolbar.title = title
 
         if (stock_commodity_detail_container != null) {
-            // The detail container view will be present only in the
-            // large-screen layouts (res/values-w900dp).
-            // If this view is present, then the
-            // activity should be in two-pane mode.
             mTwoPane = true
         }
 
@@ -121,7 +109,6 @@ class StockCommodityListActivity : AppCompatActivity(), LoaderManager.LoaderCall
             mValues?.moveToPosition(position)
             val item = mValues?.getValue() ?: return
             holder.mIdView.text = item.productInfo.alcCode
-            //holder.mContentView.text = item.productInfoAlcCode + '\n' + item.quantity.toPlainString()
 
             with(holder.itemView) {
                 tag = item

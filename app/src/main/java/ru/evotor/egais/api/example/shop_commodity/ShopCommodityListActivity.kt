@@ -20,14 +20,6 @@ import ru.evotor.egais.api.model.dictionary.ShopCommodity
 import ru.evotor.egais.api.query.ShopCommodityQuery
 import ru.evotor.query.Cursor
 
-/**
- * An activity representing a list of Pings. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a [ShopCommodityDetailActivity] representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
- */
 class ShopCommodityListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Cursor<ShopCommodity>> {
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor<ShopCommodity>?> {

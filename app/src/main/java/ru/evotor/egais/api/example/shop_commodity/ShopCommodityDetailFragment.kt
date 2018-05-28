@@ -13,14 +13,7 @@ import kotlinx.android.synthetic.main.egais_commodity_detail.*
 import ru.evotor.egais.api.example.R
 import ru.evotor.egais.api.model.dictionary.ShopCommodity
 import ru.evotor.egais.api.query.ShopCommodityQuery
-import java.util.*
 
-/**
- * A fragment representing a single OrgInfo detail screen.
- * This fragment is either contained in a [ShopCommodityListActivity]
- * in two-pane mode (on tablets) or a [ShopCommodityDetailActivity]
- * on handsets.
- */
 class ShopCommodityDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<ShopCommodity?> {
 
     private var mItem: ShopCommodity? = null
