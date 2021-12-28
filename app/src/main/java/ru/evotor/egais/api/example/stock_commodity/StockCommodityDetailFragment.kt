@@ -1,13 +1,13 @@
 package ru.evotor.egais.api.example.stock_commodity
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.AsyncTaskLoader
-import android.support.v4.content.Loader
+import androidx.loader.content.AsyncTaskLoader
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.Loader
 import kotlinx.android.synthetic.main.activity_egais_commodity_detail.*
 import kotlinx.android.synthetic.main.egais_commodity_detail.*
 import ru.evotor.egais.api.example.R
@@ -19,7 +19,7 @@ class StockCommodityDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<S
     private var mItem: StockCommodity? = null
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<StockCommodity?> {
-        class EgaisCommodityLoader : AsyncTaskLoader<StockCommodity?>(context) {
+        class EgaisCommodityLoader : AsyncTaskLoader<StockCommodity?>(requireContext()) {
             override fun loadInBackground(): StockCommodity? {
                 return arguments?.let {
                     if (it.containsKey(ARG_ITEM_ID)) {

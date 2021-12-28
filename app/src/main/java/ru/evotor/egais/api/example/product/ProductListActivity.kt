@@ -2,11 +2,11 @@ package ru.evotor.egais.api.example.product
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.AsyncTaskLoader
-import android.support.v4.content.Loader
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.AsyncTaskLoader
+import androidx.loader.content.Loader
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,11 +43,11 @@ class ProductListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<C
         return ProductInfoLoader()
     }
 
-    override fun onLoadFinished(loader: Loader<Cursor<ProductInfo>>?, data: Cursor<ProductInfo>?) {
+    override fun onLoadFinished(loader: Loader<Cursor<ProductInfo>>, data: Cursor<ProductInfo>?) {
         (product_list.adapter as ProductListActivity.SimpleItemRecyclerViewAdapter).swapCursor(data)
     }
 
-    override fun onLoaderReset(loader: Loader<Cursor<ProductInfo>>?) {
+    override fun onLoaderReset(loader: Loader<Cursor<ProductInfo>>) {
         (product_list.adapter as ProductListActivity.SimpleItemRecyclerViewAdapter).swapCursor(null)
     }
 
