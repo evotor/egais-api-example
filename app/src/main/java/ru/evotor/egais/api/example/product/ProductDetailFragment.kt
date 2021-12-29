@@ -1,13 +1,13 @@
 package ru.evotor.egais.api.example.product
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.AsyncTaskLoader
-import android.support.v4.content.Loader
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.AsyncTaskLoader
+import androidx.loader.content.Loader
 import kotlinx.android.synthetic.main.activity_product_detail.*
 import kotlinx.android.synthetic.main.product_detail.*
 import ru.evotor.egais.api.example.R
@@ -28,7 +28,7 @@ class ProductDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<ProductI
     private var mItem: ProductInfo? = null
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<ProductInfo?> {
-        class ProductInfoLoader : AsyncTaskLoader<ProductInfo?>(context) {
+        class ProductInfoLoader : AsyncTaskLoader<ProductInfo?>(requireContext()) {
             override fun loadInBackground(): ProductInfo? {
                 return arguments?.let {
                     if (it.containsKey(ProductDetailFragment.ARG_ITEM_ID)) {
@@ -36,12 +36,12 @@ class ProductDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<ProductI
                         // arguments. In a real-world scenario, use a Loader
                         // to load content from a content provider.
                         ProductInfoQuery()
-                                .alcCode.equal(it.getString(ProductDetailFragment.ARG_ITEM_ID))
-                                .execute(context)
-                                .let { cursor ->
-                                    cursor.moveToFirst()
-                                    cursor.getValue()
-                                }
+                            .alcCode.equal(it.getString(ProductDetailFragment.ARG_ITEM_ID))
+                            .execute(context)
+                            .let { cursor ->
+                                cursor.moveToFirst()
+                                cursor.getValue()
+                            }
                     } else {
                         null
                     }
@@ -76,8 +76,10 @@ class ProductDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<ProductI
         activity?.toolbar_layout?.title = mItem?.alcCode
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val rootView = inflater.inflate(R.layout.product_detail, container, false)
 
         // Show the dummy content as text in a TextView.

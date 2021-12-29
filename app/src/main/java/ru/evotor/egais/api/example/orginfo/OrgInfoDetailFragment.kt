@@ -1,13 +1,13 @@
 package ru.evotor.egais.api.example.orginfo
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.AsyncTaskLoader
-import android.support.v4.content.Loader
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.AsyncTaskLoader
+import androidx.loader.content.Loader
 import kotlinx.android.synthetic.main.activity_orginfo_detail.*
 import kotlinx.android.synthetic.main.orginfo_detail.*
 import ru.evotor.egais.api.example.R
@@ -25,7 +25,7 @@ class OrgInfoDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<OrgInfo?
     private var mItem: OrgInfo? = null
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<OrgInfo?> {
-        class OrgInfoLoader : AsyncTaskLoader<OrgInfo?>(context) {
+        class OrgInfoLoader : AsyncTaskLoader<OrgInfo?>(requireContext()) {
             override fun loadInBackground(): OrgInfo? {
                 return arguments?.let {
                     if (it.containsKey(ARG_ITEM_ID)) {
@@ -33,12 +33,12 @@ class OrgInfoDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<OrgInfo?
                         // arguments. In a real-world scenario, use a Loader
                         // to load content from a content provider.
                         OrgInfoQuery()
-                                .clientRegId.equal(it.getString(ARG_ITEM_ID))
-                                .execute(context)
-                                .let { cursor ->
-                                    cursor.moveToFirst()
-                                    cursor.getValue()
-                                }
+                            .clientRegId.equal(it.getString(ARG_ITEM_ID) ?: "")
+                            .execute(context)
+                            .let { cursor ->
+                                cursor.moveToFirst()
+                                cursor.getValue()
+                            }
                     } else {
                         null
                     }
@@ -73,8 +73,10 @@ class OrgInfoDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<OrgInfo?
         activity?.toolbar_layout?.title = mItem?.clientRegId
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val rootView = inflater.inflate(R.layout.orginfo_detail, container, false)
 
         // Show the dummy content as text in a TextView.

@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <meta-data
                 android:name="ru.evotor.launcher.BACKGROUND_COLOR"
                 android:value="#133700" />
@@ -103,6 +105,13 @@
                 android:value="ru.evotor.egais.api.example.shop_commodity.ShopCommodityListActivity" />
         </activity>
         <activity android:name=".client_settings.ClientSettingsActivity"></activity>
+
+        <activity
+            android:name=".unrocessed_documents.UnprocessedDocumentsActivity"
+            android:label="@string/title_unprocessed_documents"
+            android:parentActivityName=".unrocessed_documents.UnprocessedDocumentsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

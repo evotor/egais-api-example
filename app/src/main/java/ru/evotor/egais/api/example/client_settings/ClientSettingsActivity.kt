@@ -1,11 +1,11 @@
 package ru.evotor.egais.api.example.client_settings
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.AppCompatButton
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
 import ru.evotor.egais.api.example.R
-import ru.evotor.egais.api.query.ClientSettingsQuery
+import ru.evotor.egais.api.query.settings.ClientSettingsQuery
 
 class ClientSettingsActivity : AppCompatActivity() {
 
