@@ -1,13 +1,13 @@
 package ru.evotor.egais.api.example.waybill
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.AsyncTaskLoader
-import android.support.v4.content.Loader
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.AsyncTaskLoader
+import androidx.loader.content.Loader
 import kotlinx.android.synthetic.main.activity_waybill_detail.*
 import kotlinx.android.synthetic.main.waybill_detail.*
 import ru.evotor.egais.api.example.R
@@ -23,7 +23,8 @@ import java.util.*
  * in two-pane mode (on tablets) or a [WaybillDetailActivity]
  * on handsets.
  */
-class WaybillDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<WaybillDetailFragment.WayBillWithPositions?> {
+class WaybillDetailFragment : Fragment(),
+    LoaderManager.LoaderCallbacks<WaybillDetailFragment.WayBillWithPositions?> {
 
     data class WayBillWithPositions(val wayBill: WayBill?, val positions: List<WayBillPosition>?)
 
@@ -33,23 +34,24 @@ class WaybillDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<WaybillD
     private var mItem: WayBillWithPositions? = null
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<WayBillWithPositions?> {
-        class ProductInfoLoader : AsyncTaskLoader<WayBillWithPositions?>(context) {
+        class ProductInfoLoader : AsyncTaskLoader<WayBillWithPositions?>(requireContext()) {
             override fun loadInBackground(): WayBillWithPositions? {
                 return arguments?.let {
                     if (it.containsKey(WaybillDetailFragment.ARG_ITEM_ID)) {
-                        val uuid = it.getString(WaybillDetailFragment.ARG_ITEM_ID).let { UUID.fromString(it) }
+                        val uuid = it.getString(WaybillDetailFragment.ARG_ITEM_ID)
+                            .let { UUID.fromString(it) }
                         WayBillWithPositions(
-                                WayBillQuery()
-                                        .uuid.equal(uuid)
-                                        .execute(context)
-                                        .let { cursor ->
-                                            cursor.moveToFirst()
-                                            cursor.getValue()
-                                        },
-                                WayBillPositionQuery()
-                                        .wayBillUuid.equal(uuid)
-                                        .execute(context)
-                                        .toList()
+                            WayBillQuery()
+                                .uuid.equal(uuid)
+                                .execute(context)
+                                .let { cursor ->
+                                    cursor.moveToFirst()
+                                    cursor.getValue()
+                                },
+                            WayBillPositionQuery()
+                                .wayBillUuid.equal(uuid)
+                                .execute(context)
+                                .toList()
                         )
                     } else {
                         null
@@ -65,7 +67,10 @@ class WaybillDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<WaybillD
         return ProductInfoLoader()
     }
 
-    override fun onLoadFinished(loader: Loader<WayBillWithPositions?>, data: WayBillWithPositions?) {
+    override fun onLoadFinished(
+        loader: Loader<WayBillWithPositions?>,
+        data: WayBillWithPositions?
+    ) {
         updateData(data)
     }
 
@@ -85,8 +90,10 @@ class WaybillDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<WaybillD
         activity?.toolbar_layout?.title = mItem?.wayBill?.uuid?.toString()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val rootView = inflater.inflate(R.layout.waybill_detail, container, false)
 
         mItem?.let {

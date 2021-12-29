@@ -2,11 +2,11 @@ package ru.evotor.egais.api.example.actwriteoff
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.AsyncTaskLoader
-import android.support.v4.content.Loader
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.AsyncTaskLoader
+import androidx.loader.content.Loader
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,11 +43,11 @@ class ActWriteOffListActivity : AppCompatActivity(), LoaderManager.LoaderCallbac
         return ProductInfoLoader()
     }
 
-    override fun onLoadFinished(loader: Loader<Cursor<ActWriteOff>>?, data: Cursor<ActWriteOff>?) {
+    override fun onLoadFinished(loader: Loader<Cursor<ActWriteOff>>, data: Cursor<ActWriteOff>?) {
         (actwriteoff_list.adapter as ActWriteOffListActivity.SimpleItemRecyclerViewAdapter).swapCursor(data)
     }
 
-    override fun onLoaderReset(loader: Loader<Cursor<ActWriteOff>>?) {
+    override fun onLoaderReset(loader: Loader<Cursor<ActWriteOff>>) {
         (actwriteoff_list.adapter as ActWriteOffListActivity.SimpleItemRecyclerViewAdapter).swapCursor(null)
     }
 

@@ -2,15 +2,15 @@ package ru.evotor.egais.api.example.waybill
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.AsyncTaskLoader
-import android.support.v4.content.Loader
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.AsyncTaskLoader
+import androidx.loader.content.Loader
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_waybill_list.*
 import kotlinx.android.synthetic.main.waybill_list.*
 import kotlinx.android.synthetic.main.waybill_list_content.view.*
@@ -35,11 +35,11 @@ class WaybillListActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<C
         return ProductInfoLoader()
     }
 
-    override fun onLoadFinished(loader: Loader<Cursor<WayBill>>?, data: Cursor<WayBill>?) {
+    override fun onLoadFinished(loader: Loader<Cursor<WayBill>>, data: Cursor<WayBill>?) {
         (waybill_list.adapter as WaybillListActivity.SimpleItemRecyclerViewAdapter).swapCursor(data)
     }
 
-    override fun onLoaderReset(loader: Loader<Cursor<WayBill>>?) {
+    override fun onLoaderReset(loader: Loader<Cursor<WayBill>>) {
         (waybill_list.adapter as WaybillListActivity.SimpleItemRecyclerViewAdapter).swapCursor(null)
     }
 

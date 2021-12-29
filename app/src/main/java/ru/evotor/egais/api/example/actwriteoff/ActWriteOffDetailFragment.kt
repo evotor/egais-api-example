@@ -1,13 +1,13 @@
 package ru.evotor.egais.api.example.actwriteoff
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.AsyncTaskLoader
-import android.support.v4.content.Loader
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.AsyncTaskLoader
+import androidx.loader.content.Loader
 import kotlinx.android.synthetic.main.activity_actwriteoff_detail.*
 import kotlinx.android.synthetic.main.actwriteoff_detail.*
 import ru.evotor.egais.api.example.R
@@ -24,7 +24,7 @@ class ActWriteOffDetailFragment : Fragment(), LoaderManager.LoaderCallbacks<ActW
     private var mItem: ActWriteOffWithPositions? = null
 
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<ActWriteOffWithPositions?> {
-        class ActWriteOffLoader : AsyncTaskLoader<ActWriteOffWithPositions?>(context) {
+        class ActWriteOffLoader : AsyncTaskLoader<ActWriteOffWithPositions?>(requireContext()) {
             override fun loadInBackground(): ActWriteOffWithPositions? {
                 return arguments?.let {
                     if (it.containsKey(ActWriteOffDetailFragment.ARG_ITEM_ID)) {
